@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>基数排序</title>
+</head>
+<body>
+	<p>基数排序有两种方法</p>
+	<ol>
+		<li>MSD 从高位开始进行排序</li>
+		<li>LSD 从低位开始进行排序</li>
+	</ol>
+	<ul>
+		<li><strong>基数排序</strong>：根据键值的每个数字来分配桶</li>
+		<li><strong>计数排序</strong>：每个桶只存储单一键值</li>
+		<li><strong>桶排序</strong>：每个桶存储一定范围的数值</li>
+	</ul>
+	<p>LSD演示</p>
+	<img src="img/jishu.gif">
+	<script type="text/javascript">
+		function radixSort(arr, maxDigit) {
+		    var mod = 10;
+		    var dev = 1;
+		    var counter = [];
+		    console.time('基数排序耗时');
+		    for (var i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
+		        for(var j = 0; j < arr.length; j++) {
+		            var bucket = parseInt((arr[j] % mod) / dev);
+		            if(counter[bucket]== null) {
+		                counter[bucket] = [];
+		            }
+		            counter[bucket].push(arr[j]);
+		        }
+		        var pos = 0;
+		        for(var j = 0; j < counter.length; j++) {
+		            var value = null;
+		            if(counter[j]!=null) {
+		                while ((value = counter[j].shift()) != null) {
+		                      arr[pos++] = value;
+		                }
+		          }
+		        }
+		    }
+		    console.timeEnd('基数排序耗时');
+		    return arr;
+		}
+		var arr = [32,3,1,13,43,21,64];
+		console.log(radixSort(arr,2));
+	</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>堆排序</title>
+</head>
+<body>
+	<p>堆排序可以说是一种利用堆的概念来排序的选择排序</p>
+	<ol>
+		<li>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列</li>
+		<li>小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列</li>
+	</ol>
+	<img src="img/dui.gif">
+	<script type="text/javascript">
+		var arr=[32,3,1,13,43,21,64];
+		function heapSort(array){
+			if (Object.prototype.toString.call(array).slice(8, -1) === 'Array') {
+		        //建堆
+		        var heapSize = array.length, temp;
+		        for (var i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
+		            heapify(array, i, heapSize);
+		        }
+
+		        //堆排序
+		        for (var j = heapSize - 1; j >= 1; j--) {
+		            temp = array[0];
+		            array[0] = array[j];
+		            array[j] = temp;
+		            heapify(array, 0, --heapSize);
+		        }
+		        return array;
+		    } else {
+		        return 'array is not an Array!';
+		    }
+		}
+		function heapify(arr, x, len) {
+		    if (Object.prototype.toString.call(arr).slice(8, -1) === 'Array' && typeof x === 'number') {
+		        var l = 2 * x + 1, r = 2 * x + 2, largest = x, temp;
+		        if (l < len && arr[l] > arr[largest]) {
+		            largest = l;
+		        }
+		        if (r < len && arr[r] > arr[largest]) {
+		            largest = r;
+		        }
+		        if (largest != x) {
+		            temp = arr[x];
+		            arr[x] = arr[largest];
+		            arr[largest] = temp;
+		            heapify(arr, largest, len);
+		        }
+		    } else {
+		        return 'arr is not an Array or x is not a number!';
+		    }
+		}
+		console.log(heapSort(arr));
+	</script>
+</body>
+</html>

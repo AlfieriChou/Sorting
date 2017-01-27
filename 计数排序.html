@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>计数排序</title>
+</head>
+<body>
+	<p>计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定单位的整数。</p>
+	<img src="img/计数排序.gif">
+	<script type="text/javascript">
+		function countingSort(array) {
+		    var len = array.length,
+		        B = [],
+		        C = [],
+		        min = max = array[0];
+		    console.time('计数排序耗时');
+		    for (var i = 0; i < len; i++) {
+		        min = min <= array[i] ? min : array[i];
+		        max = max >= array[i] ? max : array[i];
+		        C[array[i]] = C[array[i]] ? C[array[i]] + 1 : 1;
+		    }
+		    for (var j = min; j < max; j++) {
+		        C[j + 1] = (C[j + 1] || 0) + (C[j] || 0);
+		    }
+		    for (var k = len - 1; k >= 0; k--) {
+		        B[C[array[k]] - 1] = array[k];
+		        C[array[k]]--;
+		    }
+		    console.timeEnd('计数排序耗时');
+		    return B;
+		}
+		var arr = [32,3,1,13,43,21,64];
+		console.log(countingSort(arr));	
+	</script>
+</body>
+</html>

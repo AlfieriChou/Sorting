@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>插入排序</title>
+</head>
+<body>
+	<img src="img/charu.gif">
+	<script type="text/javascript">
+		var arr = [32,3,1,13,43,21,64];
+		function insertSort(arr){
+			var len = arr.length;
+			var preIndex, current;
+			for(var i=1;i<len;i++){
+				preIndex = i-1;
+				current = arr[i];
+				while(preIndex >=0&& arr[preIndex]>current){
+					arr[preIndex+1]=arr[preIndex];
+					preIndex--;
+				}
+				arr[preIndex+1]=current;
+			}
+			return arr;
+		}
+		console.log(insertSort(arr));
+	</script>
+</body>
+</html>
